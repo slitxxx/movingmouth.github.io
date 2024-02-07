@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moving Mouth</title>
+  <style>
+    html,
+    body {
+      height: 100vh;
+      width: 100vw;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mouth-container {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+      height: 100%;
+      margin: 0 auto;
+    }
+
+    .mouthImg,
+    #mouth {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #mouth {
+      z-index: 1;
+    }
+
+    @media (max-width: 15.6in) {
+      .mouth-container {
+        width: 80%;
+        max-width: 80%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="mouth-container">
+    <img class="mouthImg" src="./2.png" alt="">
+    <img id="mouth" src="./1.png" alt="Mouth Image">
+  </div>
+</body>
+<script>
+  let isOpen = false;
+  let originalMouthPosition = null;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const mouth = document.getElementById("mouth");
+
+    originalMouthPosition = {
+      top: mouth.style.top,
+    };
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowDown" && !isOpen) {
+        mouth.style.top = "calc(50% + 8px)";
+        isOpen = true;
+      }
+    });
+
+    document.addEventListener("keyup", function (event) {
+      if (event.key === "ArrowDown" && isOpen) {
+        mouth.style.top = originalMouthPosition.top;
+        isOpen = false;
+      }
+    });
+  });
+</script>
+
+</html>
